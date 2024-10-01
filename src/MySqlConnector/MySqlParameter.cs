@@ -880,10 +880,10 @@ public sealed class MySqlParameter : DbParameter, IDbDataParameter, ICloneable
 	internal static string NormalizeParameterName(string name) =>
 		name.Trim() switch
 		{
-			['@' or '?', '`', .. var middle, '`'] => middle.Replace("``", "`"),
-			['@' or '?', '\'', .. var middle, '\''] => middle.Replace("''", "'"),
-			['@' or '?', '"', .. var middle, '"'] => middle.Replace("\"\"", "\""),
-			['@' or '?', .. var rest] => rest,
+			['@' or '?' or '$', '`', .. var middle, '`'] => middle.Replace("``", "`"),
+			['@' or '?' or '$', '\'', .. var middle, '\''] => middle.Replace("''", "'"),
+			['@' or '?' or '$', '"', .. var middle, '"'] => middle.Replace("\"\"", "\""),
+			['@' or '?' or '$', .. var rest] => rest,
 			{ } other => other,
 		};
 
